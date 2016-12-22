@@ -56,7 +56,6 @@
           xdr.onerror = win.Function.prototype;
           xdr.onabort = win.Function.prototype;
           xdr.onload = win.Function.prototype;
-          win.console.warn('XDR failed');
           return void 0;
         };
         win.setTimeout(xdr.send(), 0);
@@ -76,7 +75,6 @@
           xhr.onerror = win.Function.prototype;
           xhr.onabort = win.Function.prototype;
           xhr.onreadystatechange = win.Function.prototype;
-          win.console.warn('XHR failed. Status code: ' + xhr.status + '; readyState: ' + xhr.readyState);
           return void 0;
         };
         win.setTimeout(xhr.send(), 0);
