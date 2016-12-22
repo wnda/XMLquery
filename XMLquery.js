@@ -50,7 +50,9 @@
       default:
         parser = new win.DOMParser();
         xhr = new win.XMLHttpRequest();
-        use_cors = win.location.host !== config.url.match(/^(?:https?):\/\/(?:[^@:\/]*@)?([^:\/]+)/)[1] ? 'cors' : 'no-cors';
+        use_cors = typeof config.cors !== 'undefined' && config.cors === true ? 
+          'cors' : win.location.host !== config.url.match(/^(?:https?):\/\/(?:[^@:\/]*@)?([^:\/]+)/)[1] ? 
+            'cors' : 'no-cors';
     }
 
     switch (true) {
