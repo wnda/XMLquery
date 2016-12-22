@@ -123,11 +123,18 @@
 
   function alertLog () {
     var i = 0, args = [];
+    
+    if (arguments.length < 1) {
+      return void 0;
+    } else if (arguments.length === 1) {
+      return win.alert(arguments[0]);
+    }
+    
     for ( ; i < arguments.length; ++i) {
       args[i] = arguments[i];
     }
-    args = args.length > 1 ? args.join(';') : args[0];
-    return win.alert(args);
+    
+    return win.alert(args.join(';'));
   }
 
 })(window, window.document);
