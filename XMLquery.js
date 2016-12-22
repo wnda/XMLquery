@@ -130,7 +130,7 @@
       return win.alert(arguments[0]);
     }
     
-    for ( ; i < arguments.length; ++i) {
+    for (; i < arguments.length; ++i) {
       args[i] = arguments[i];
     }
     
