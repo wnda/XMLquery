@@ -15,7 +15,7 @@
 
   function XMLquery (config) {
     var parser, xml_doc, use_cors, xhr, xdr;
-    
+
     switch (true) {
       case !('DOMParser' in win):
         win.console.error('Your browser does not support DOMParser');
@@ -123,17 +123,14 @@
 
   function alertLog () {
     var i = 0, args = [];
-    
     if (arguments.length < 1) {
       return void 0;
     } else if (arguments.length === 1) {
       return win.alert(arguments[0]);
     }
-    
     for (; i < arguments.length; ++i) {
       args[i] = arguments[i];
     }
-    
     return win.alert(args.join(';'));
   }
 
