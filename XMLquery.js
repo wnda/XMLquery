@@ -7,7 +7,9 @@
   if (typeof win.console === 'undefined') {
     win.console = {
       "log": alertLog,
-      "error": alertLog
+      "error": alertLog,
+      "info": alertLog,
+      "warn": alertLog
     };
   }
 
