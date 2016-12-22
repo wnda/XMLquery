@@ -117,7 +117,7 @@
           xhr.ontimeout = win.Function.prototype;
           xhr.onerror = win.Function.prototype;
           xhr.onabort = win.Function.prototype;
-          xhr.onreadystatechange = function () {};
+          xhr.onreadystatechange = win.Function.prototype;
           win.console.warn('XHR failed. Status code: ' + xhr.status + '; readyState: ' + xhr.readyState);
           return void 0;
         };
