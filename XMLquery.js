@@ -14,11 +14,9 @@
   win.XMLquery = XMLquery;
 
   function XMLquery (config) {
-
     var parser, xml_doc, use_cors, xhr, xdr;
-
+    
     switch (true) {
-
       case !('DOMParser' in win):
         win.console.error('Your browser does not support DOMParser');
         return void 0;
@@ -64,17 +62,14 @@
               xml_doc = parser.parseFromString(xml, 'text/xml');
               if (typeof xml_doc !== 'object') return;
               return config.callback(xml_doc);
-
             }).catch(function (e) {
               win.console.warn('Failed to process response; error: ' + e);
               return void 0;
-
             });
           }
         }).catch(function (e) {
           win.console.warn('Failed to fetch; error: ' + e);
           return void 0;
-
         });
         break;
 
@@ -128,10 +123,12 @@
   }
 
   function alertLog () {
-    var i = 0;
+    var i = 0, args = [];
     for ( ; i < arguments.length; ++i) {
-      alert(arguments[i]);
+      args[i] = arguments[i];
     }
+    args = args.length > 1 ? args.join(';') : args[0];
+    return win.alert(args);
   }
 
 })(window, window.document);
