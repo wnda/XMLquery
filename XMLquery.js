@@ -1,8 +1,8 @@
 ;(function (win, doc) {
 
-  win.getXMLDoc = getXMLDoc;
+  win.XMLquery = XMLquery;
 
-  function getXMLDoc (config) {
+  function XMLquery (config) {
     var xhr;
     var xml_doc;
     var parser;
