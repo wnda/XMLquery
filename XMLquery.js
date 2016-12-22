@@ -59,7 +59,10 @@
           if (resp.ok) {
             return resp.text().then(function (xml) {
               xml_doc = parser.parseFromString(xml, 'text/xml');
-              if (typeof xml_doc !== 'object') return;
+              if (typeof xml_doc !== 'object') {
+                win.console.log('Document failed to be processed');
+                return void 0;
+              }
               return config.callback(xml_doc);
             }).catch(function (e) {
               win.console.warn('Failed to process response; error: ' + e);
@@ -78,7 +81,8 @@
         xdr.onload = function () {
           xml_doc = parser.parseFromString(xdr.responseText, 'text/xml');
           if (typeof xml_doc !== 'object') {
-            return;
+            win.console.log('Document failed to be processed');
+            return void 0;
           }
           return config.callback(xml_doc);
         };
@@ -99,7 +103,8 @@
           if (xhr.readyState === 4 && xhr.status >= 200 && xhr.status < 300) {
             xml_doc = parser.parseFromString(xhr.responseText, 'text/xml');
             if (typeof xml_doc !== 'object') {
-              return;
+              win.console.log('Document failed to be processed');
+              return void 0;
             }
             return config.callback(xml_doc);
           }
