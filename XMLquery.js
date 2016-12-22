@@ -49,6 +49,7 @@
 
       default:
         parser = new win.DOMParser();
+        xhr = new win.XMLHttpRequest();
         use_cors = win.location.host !== config.url.match(/^(?:https?):\/\/(?:[^@:\/]*@)?([^:\/]+)/)[1] ? 'cors' : 'no-cors';
     }
 
@@ -80,13 +81,13 @@
       case ('XDomainRequest' in win && use_cors === 'cors'):
         xdr = new win.XDomainRequest();
         xdr.open('GET', config.url, true);
-
         xdr.onload = function () {
           xml_doc = parser.parseFromString(xdr.responseText, 'text/xml');
-          if (typeof xml_doc !== 'object') return;
+          if (typeof xml_doc !== 'object') {
+            return;
+          }
           return config.callback(xml_doc);
         };
-
         xdr.ontimeout = xdr.onerror = xdr.onabort = function () {
           xdr.ontimeout = function () {};
           xdr.onerror = function () {};
@@ -95,22 +96,20 @@
           win.console.warn('XDR failed');
           return void 0;
         };
-
         win.setTimeout(xdr.send(), 0);
         break;
 
-      default:
-        xhr = new win.XMLHttpRequest();
+      case (use_cors === 'no-cors' || 'withCredentials' in xhr && use_cors === 'cors'):
         xhr.open('GET', config.url, true);
-
         xhr.onreadystatechange = function () {
           if (xhr.readyState === 4 && xhr.status >= 200 && xhr.status < 300) {
             xml_doc = parser.parseFromString(xhr.responseText, 'text/xml');
-            if (typeof xml_doc !== 'object') return;
+            if (typeof xml_doc !== 'object') {
+              return;
+            }
             return config.callback(xml_doc);
           }
         };
-
         xhr.ontimeout = xhr.onerror = xhr.onabort = function () {
           xhr.ontimeout = function () {};
           xhr.onerror = function () {};
@@ -119,8 +118,12 @@
           win.console.warn('XHR failed. Status code: ' + xhr.status + '; readyState: ' + xhr.readyState);
           return void 0;
         };
-
         win.setTimeout(xhr.send(), 0);
+        break;
+
+      default:
+        win.console.warn('You\'re either testing a bizarre edge case, or somehow you\'ve broken XHR/XDR');
+        return void 0;
     }
   }
 
