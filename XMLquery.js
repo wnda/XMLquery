@@ -52,7 +52,6 @@
     }
 
     switch (true) {
-
       case ('fetch' in win):
         win.fetch(config.url, {
           "mode": use_cors
