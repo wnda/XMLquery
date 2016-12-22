@@ -35,12 +35,12 @@
             return config.callback(xml_doc);
 
           }).catch(function (e) {
-            console.warn('Failed to process response; error: ' + e);
+            win.console.warn('Failed to process response; error: ' + e);
           });
         }
 
       }).catch(function (e) {
-        console.warn('Failed to fetch; error: ' + e);
+        win.console.warn('Failed to fetch; error: ' + e);
       });
 
     } else {
@@ -65,7 +65,7 @@
         xhr.ontimeout = function () {};
         xhr.onerror = function () {};
         xhr.onabort = function () {};
-        console.warn('XHR failed. Status code: ' + xhr.status + '; readyState: ' + xhr.readyState);
+        win.console.warn('XHR failed. Status code: ' + xhr.status + '; readyState: ' + xhr.readyState);
       };
 
       win.setTimeout(
