@@ -89,10 +89,10 @@
           return config.callback(xml_doc);
         };
         xdr.ontimeout = xdr.onerror = xdr.onabort = function () {
-          xdr.ontimeout = function () {};
-          xdr.onerror = function () {};
-          xdr.onabort = function () {};
-          xdr.onload = function () {};
+          xdr.ontimeout = win.Function.prototype;
+          xdr.onerror = win.Function.prototype;
+          xdr.onabort = win.Function.prototype;
+          xdr.onload = win.Function.prototype;
           win.console.warn('XDR failed');
           return void 0;
         };
@@ -111,9 +111,9 @@
           }
         };
         xhr.ontimeout = xhr.onerror = xhr.onabort = function () {
-          xhr.ontimeout = function () {};
-          xhr.onerror = function () {};
-          xhr.onabort = function () {};
+          xhr.ontimeout = win.Function.prototype;
+          xhr.onerror = win.Function.prototype;
+          xhr.onabort = win.Function.prototype;
           xhr.onreadystatechange = function () {};
           win.console.warn('XHR failed. Status code: ' + xhr.status + '; readyState: ' + xhr.readyState);
           return void 0;
