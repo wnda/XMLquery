@@ -15,10 +15,9 @@
       case (typeof config !== 'object'):
       case !('url' in config):
       case !('callback' in config):
-      case (config.url.length < 1):
-      case (config.callback.length < 1):
       case (typeof config.url !== 'string'):
       case (typeof config.callback !== 'function'):
+      case (!config.url || !config.callback):
         return;
     }
 
