@@ -1,10 +1,10 @@
 ;(function (win, doc) {
 
-  'use strict';
+  if (typeof win === 'undefined' || typeof doc === 'undefined') {
+    return void 0;
+  }
 
-  if (typeof win === 'undefined' || typeof doc === 'undefined') return void 0;
-
-  if (typeof win.console === 'undefined' ) {
+  if (typeof win.console === 'undefined') {
     win.console = {
       "log": alertLog,
       "error": alertLog
@@ -14,9 +14,11 @@
   win.XMLquery = XMLquery;
 
   function XMLquery (config) {
+
     var parser, xml_doc, use_cors, xhr, xdr;
 
     switch (true) {
+
       case !('DOMParser' in win):
         win.console.error('Your browser does not support DOMParser');
         return void 0;
@@ -51,6 +53,7 @@
     }
 
     switch (true) {
+
       case ('fetch' in win):
         win.fetch(config.url, {
           "mode": use_cors
@@ -60,25 +63,30 @@
               xml_doc = parser.parseFromString(xml, 'text/xml');
               if (typeof xml_doc !== 'object') return;
               return config.callback(xml_doc);
+
             }).catch(function (e) {
               win.console.warn('Failed to process response; error: ' + e);
               return void 0;
+
             });
           }
         }).catch(function (e) {
           win.console.warn('Failed to fetch; error: ' + e);
           return void 0;
+
         });
         break;
 
       case ('XDomainRequest' in win && use_cors === 'cors'):
         xdr = new win.XDomainRequest();
         xdr.open('GET', config.url, true);
+
         xdr.onload = function () {
           xml_doc = parser.parseFromString(xdr.responseText, 'text/xml');
           if (typeof xml_doc !== 'object') return;
           return config.callback(xml_doc);
         };
+
         xdr.ontimeout = xdr.onerror = xdr.onabort = function () {
           xdr.ontimeout = function () {};
           xdr.onerror = function () {};
@@ -87,13 +95,14 @@
           win.console.warn('XDR failed');
           return void 0;
         };
+
         win.setTimeout(xdr.send(), 0);
         break;
 
       default:
         xhr = new win.XMLHttpRequest();
         xhr.open('GET', config.url, true);
-        if ('responseType' in xhr) xhr.responseType = 'text';
+
         xhr.onreadystatechange = function () {
           if (xhr.readyState === 4 && xhr.status >= 200 && xhr.status < 300) {
             xml_doc = parser.parseFromString(xhr.responseText, 'text/xml');
@@ -101,6 +110,7 @@
             return config.callback(xml_doc);
           }
         };
+
         xhr.ontimeout = xhr.onerror = xhr.onabort = function () {
           xhr.ontimeout = function () {};
           xhr.onerror = function () {};
@@ -109,6 +119,7 @@
           win.console.warn('XHR failed. Status code: ' + xhr.status + '; readyState: ' + xhr.readyState);
           return void 0;
         };
+
         win.setTimeout(xhr.send(), 0);
     }
   }
