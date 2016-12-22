@@ -9,11 +9,14 @@ Whether CORS should be enabled is detected by comparing the URL to `window.locat
     <script>
       window.XMLquery({
         "url": "http://www.YOUR-AMAZING-WEBSITE/XML-RESOURCE.xml",
+        "cors": false,
         "callback": function(){
                       // do stuff
                     }
       });
     </script>
+
+`config.cors` is not mandatory; set it to true to force `CORS` for your AJAX request.
 
 Currently this library is designed to work only in-browser, i.e. not Web Workers or Node.js.
 
