@@ -6,7 +6,7 @@ Whether CORS should be enabled is detected by comparing the URL to `window.locat
 `XMLquery` is exposed to the `window` object as a global method, accepting a mandatory configuration object with two mandatory properties: `url` and `callback`. Given the purpose of this library, it's kind of easy to tell why they are mandatory.
 
     <!-- Include script -->
-    <script src="/js/xmlquery.js"></script>
+    <script src="/js/XMLquery.js"></script>
     
     <!-- Make the call with config object -->
     <script>
@@ -21,6 +21,10 @@ Whether CORS should be enabled is detected by comparing the URL to `window.locat
     
 You can also store your config object in a variable and pass it in, like so:
 
+    <!-- Include script -->
+    <script src="/js/XMLquery.js"></script>
+    
+    <!-- Make the call with config object -->
     <script>
       var config = {
         "url": "http://www.YOUR-AMAZING-WEBSITE/XML-RESOURCE.xml",
