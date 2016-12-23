@@ -1,12 +1,8 @@
 ;(function (win, doc) {
-
   if (typeof win === 'undefined' || typeof doc === 'undefined') return void 0;
-
   win.XMLquery = XMLquery;
-
   function XMLquery (config) {
     var parser, xml_doc, use_cors, xhr, xdr;
-
     switch (true) {
       case !('DOMParser' in win):
       case !('XMLHttpRequest' in win):
@@ -23,7 +19,6 @@
           'cors' : win.location.host !== config.url.match(/^(?:https?):\/\/(?:[^@:\/]*@)?([^:\/]+)/)[1] ?
             'cors' : 'no-cors';
     }
-
     switch (true) {
       case ('fetch' in win):
         win.fetch(config.url, {
