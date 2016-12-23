@@ -42,7 +42,6 @@
           return void 0;
         });
         break;
-
       case ('XDomainRequest' in win && use_cors === 'cors'):
         xdr = new win.XDomainRequest();
         xdr.open('GET', config.url, true);
@@ -60,7 +59,6 @@
         };
         win.setTimeout(xdr.send(), 0);
         break;
-
       case (use_cors === 'no-cors' || 'withCredentials' in xhr && use_cors === 'cors'):
         xhr.open('GET', config.url, true);
         xhr.onreadystatechange = function () {
@@ -79,10 +77,8 @@
         };
         win.setTimeout(xhr.send(), 0);
         break;
-
       default:
         return void 0;
     }
   }
-
 })(window, window.document);
