@@ -1,8 +1,11 @@
 ;(function (win, doc) {
   if (typeof win === 'undefined' || typeof doc === 'undefined') return void 0;
+  
   win.XMLquery = XMLquery;
+  
   function XMLquery (config) {
     var parser, xml_doc, use_cors, xhr, xdr;
+  
     switch (true) {
       case !('DOMParser' in win):
       case !('XMLHttpRequest' in win):
@@ -12,6 +15,7 @@
       case !(config.url):
       case !(config.url.match(/^(?:https?):\/\//)):
         return void 0;
+    
       default:
         parser = new win.DOMParser();
         xhr = new win.XMLHttpRequest();
@@ -19,6 +23,7 @@
           'cors' : win.location.host !== config.url.match(/^(?:https?):\/\/(?:[^@:\/]*@)?([^:\/]+)/)[1] ?
             'cors' : 'no-cors';
     }
+    
     switch (true) {
       case ('fetch' in win):
         win.fetch(config.url, {
@@ -37,6 +42,7 @@
           return void 0;
         });
         break;
+        
       case ('XDomainRequest' in win && use_cors === 'cors'):
         xdr = new win.XDomainRequest();
         xdr.open('GET', config.url, true);
@@ -54,6 +60,7 @@
         };
         win.setTimeout(xdr.send(), 0);
         break;
+        
       case (use_cors === 'no-cors' || 'withCredentials' in xhr && use_cors === 'cors'):
         xhr.open('GET', config.url, true);
         xhr.onreadystatechange = function () {
@@ -72,6 +79,7 @@
         };
         win.setTimeout(xhr.send(), 0);
         break;
+        
       default:
         return void 0;
     }
