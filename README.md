@@ -46,3 +46,13 @@ IE9+. IE8 will be fine if you polyfill `window.DOMParser` (as a minimum, you nee
 
 ### Why no IE7/IE8 support out of the box?
 As you can see, this library requires `window.DOMParser`. `DOMParser` was introduced in IE9, where both `window.XMLHttpRequest` and `window.XDomainRequest` were also available, and thus there is not much point including support for `window.ActiveXObject('Microsoft.XMLHTTP')`, `window.ActiveXObject('Msxml2.XMLHTTP')`, or any other crap like that. If you're going to the trouble of polyfilling `window.DOMParser`, you may as well throw in an `window.XMLHttpRequest` or `window.fetch` polyfill as well.
+
+
+
+
+    /*//////////////
+    background-color: #ff7e75 !important;
+    background: -moz-linear-gradient(120deg, #ff7e75, #ff9988, #a91f56) !important;
+    background: -webkit-linear-gradient(120deg, #ff7e75, #ff9988, #a91f56) !important;
+    background: linear-gradient(120deg, #ff7e75, #ff9988, #a91f56) !important;
+    //////////////*/
